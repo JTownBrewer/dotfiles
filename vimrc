@@ -1,8 +1,12 @@
 set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
-filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
-set t_Co=256              " enable 256-color mode.
 syntax enable             " enable syntax highlighting (previously syntax on).
-colorscheme desert        " set colorscheme
+let g:solarized_termcolors=256
+set t_Co=256              " enable 256-color mode.
+"let g:soloarized_termtrans=1
+set background=dark       " Dark background
+colorscheme solarized     " set colorscheme
+"colorscheme desert
+filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 set number                " show line numbers
 set laststatus=2          " last window always has a statusline
 filetype indent on        " activates indenting for files
@@ -18,3 +22,4 @@ set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
 set smarttab              " use tabs at the start of a line, spaces elsewhere
 set nowrap                " don't wrap text
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
