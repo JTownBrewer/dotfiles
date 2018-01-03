@@ -45,17 +45,17 @@ fi
 if [ "$color_prompt" = yes ]; then
     if [ "$UID" = 0 ]; then
         # root color
-	    USER_COLOR='\[\033[1;31m\]'
+	    USER_COLOR='\[\e[0;31m\]'
     else
-        USER_COLOR='\[\033[1;32m\]'
+        USER_COLOR='\[\e[0;33m\]'
     fi
-    HOST_COLOR='\[\033[1;33m\]'
-    DIR_COLOR='\[\033[1;34m\]'
-    PS1="${USER_COLOR}\u\[\033[0;33m\]@${HOST_COLOR}\h${DIR_COLOR}[\W]${USER_COLOR}\\$\[\033[00m\] "
+    HOST_COLOR='\[\e[1;31m\]'
+    DIR_COLOR='\[\e[44;37m\]'
+    PS1="${USER_COLOR}\u\[\e[2;33m\]@\[\e[0m\]${HOST_COLOR}\h\[\e[0m\] [${DIR_COLOR}\W\[\e[0m\]] ${USER_COLOR}\\$\[\e[00m\] "
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='\u@\h:\w\$ '
 fi
-unset color_prompt force_color_prompt
+unset color_prompt force_color_prompt USER_COLOR HOST_COLOR DIR_COLOR
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
