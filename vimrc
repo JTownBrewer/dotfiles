@@ -1,7 +1,7 @@
 set nocompatible          " get rid of Vi compatibility mode. SET FIRST!
 syntax enable             " enable syntax highlighting (previously syntax on).
-let g:solarized_termcolors=256
-set t_Co=256              " enable 256-color mode.
+let g:solarized_termcolors=16
+"set t_Co=256              " enable 256-color mode.
 "let g:soloarized_termtrans=1
 set background=dark       " Dark background
 colorscheme solarized     " set colorscheme
