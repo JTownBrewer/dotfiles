@@ -39,7 +39,7 @@ bind } history
 # ------------------------------------------------------------------------------
 
 # Set the term type to support 256 colors
-term screen-256color
+term screen.xterm-256color
 
 # The vt100 description does not mention "dl". *sigh*
 termcapinfo vt100 dl=5\E[M
