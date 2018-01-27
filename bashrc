@@ -22,7 +22,7 @@ shopt -s checkwinsize
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm|xterm-color|*-256color) color_prompt=yes;;
+    xterm|xterm-color|*-256color|linux) color_prompt=yes;;
 #    xterm-color) color_prompt=yes;;
 #    xterm-256color) color_prompt=yes;;
 #    screen.xterm-256color) color_prompt=yes;;
@@ -87,6 +87,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
+alias lh='ls -lh'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
