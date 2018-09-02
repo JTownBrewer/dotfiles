@@ -9,6 +9,7 @@ colorscheme solarized     " set colorscheme
 filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
 set number                " show line numbers
 set laststatus=2          " last window always has a statusline
+set tabline=2
 filetype indent on        " activates indenting for files
 set nohlsearch            " Don't continue to highlight searched phrases.
 set incsearch             " But do highlight as you type your search.
@@ -19,7 +20,11 @@ set tabstop=4             " tab spacing
 set softtabstop=4         " unify
 set shiftwidth=4          " indent/outdent by 4 columns
 set shiftround            " always indent/outdent to the nearest tabstop
-set expandtab             " use spaces instead of tabs
+"set expandtab             " use spaces instead of tabs
 set smarttab              " use tabs at the start of a line, spaces elsewhere
 set nowrap                " don't wrap text
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+let g:powerline_pycmd="py3"
+" Show tab chars as a small right arror (ctrl-v u 25b8)
+set list
+set listchars=tab:▸\ 
