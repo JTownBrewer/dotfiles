@@ -106,12 +106,9 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
-source $ZSH/oh-my-zsh.sh
-
-
 if [[ -f /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme ]]; then
 	source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
-elif [[ -f ~/.oh-my-zsh/custom/themes/powerlevel9k ]]; then
+elif [[ -d ~/.oh-my-zsh/custom/themes/powerlevel9k/ ]]; then
 	ZSH_THEME="powerlevel9k/powerlevel9k"
 elif [[ -f ~/powerlevel9k/powerlevel9k.zsh-theme ]]; then
 	source ~/powerlevel9k/powerlevel9k.zsh-theme
@@ -124,6 +121,8 @@ fi
 
 #powerline-daemon -q
 #. /usr/share/powerline/bindings/zsh/powerline.zsh
+
+source $ZSH/oh-my-zsh.sh
 
 eval $(dircolors -b ~/.dircolors)
 
