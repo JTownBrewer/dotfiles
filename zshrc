@@ -107,9 +107,17 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 # powerlevel9k Customization
+#export DEFAULT_USER=$USER
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs host)
+POWERLEVEL9K_HOST_LOCAL_FOREGROUND='178'
+POWERLEVEL9K_HOST_REMOTE_FOREGROUND='005'
 POWERLEVEL9K_ALWAYS_SHOW_USER=true
 POWERLEVEL9K_DIR_SHOW_WRITABLE=true
-POWERLEVEL9K_CONTEXT_ROOT_FORGROUND='red'
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_USER_DEFAULT_FOREGROUND='yellow'
+POWERLEVEL9K_USER_ROOT_FOREGROUND='red'
 
 if [[ -f /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme ]]; then
 	source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
