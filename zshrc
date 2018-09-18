@@ -106,6 +106,11 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
+# powerlevel9k Customization
+POWERLEVEL9K_ALWAYS_SHOW_USER=true
+POWERLEVEL9K_DIR_SHOW_WRITABLE=true
+POWERLEVEL9K_CONTEXT_ROOT_FORGROUND='red'
+
 if [[ -f /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme ]]; then
 	source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 elif [[ -d ~/.oh-my-zsh/custom/themes/powerlevel9k/ ]]; then
