@@ -43,6 +43,6 @@ done
 echo "Creating symlink for vim colors."
 mkdir -p ${olddir}/.vim/colors 2>&1 > /dev/null
 mkdir -p ~/.vim/colors &>/dev/null 2>&1 > /dev/null
-mv ~/.vim/colors/solarized.vim ${olddir}/.vim/colors 2>&1 /dev/null
-ln -s $dir/vim/colors/solarized.vim ~/.vim/colors/solarized.vim
+mv ~/.vim/colors/solarized.vim ${olddir}/.vim/colors 2>&1 > /dev/null
+ln -s $dir/vim/colors/solarized.vim ~/.vim/colors/solarized.vim 2>&1 > /dev/null
 
