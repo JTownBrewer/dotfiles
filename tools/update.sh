@@ -1,6 +1,7 @@
 #!/bin/bash
 
-git pull --rebase --stats ~/dotfiles
+cd ~/dotfiles
+git pull --rebase --stat origin master
 
 if [[ -f ~/.oh-my-zsh/tools/upgrade.sh ]]; then
 	~/.oh-my-zsh/tools/upgrade.sh
