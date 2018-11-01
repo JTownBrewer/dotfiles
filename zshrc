@@ -135,7 +135,9 @@ POWERLEVEL9K_STATUS_OK=false
 #POWERLEVEL9K_HOST_LOCAL_FOREGROUND='178'
 #POWERLEVEL9K_HOST_REMOTE_FOREGROUND='005'
 
-if [[ -f ~/.host_shell-theme ]]; then
+if [[ "${TERM}" == "linux" ]]; then
+	ZSH_THEME="maran"
+elif [[ -f ~/.host_shell-theme ]]; then
 	source ~/.host_shell-theme
 elif [[ -f /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme ]]; then
 	source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
