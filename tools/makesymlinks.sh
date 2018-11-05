@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="bashrc vimrc screenrc dircolors toprc tmux.conf zshrc"     # list of files/folders to symlink in homedir
+#files="bashrc vimrc screenrc dircolors toprc tmux.conf zshrc"     # list of files/folders to symlink in homedir
 
 ##########
 
@@ -25,14 +25,23 @@ fi
 cd $dir
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
-for file in $files; do
-	echo -ne ".${file}: \t"
-	if [[ -f "${HOME}/.${file}" ]] &&  [[ ! -h "${HOME}/.${file}" ]]; then
-		mv ${HOME}/.${file} ${olddir}
-		echo -ne "[Moved]\t"
+for file in $dir/config/*; do
+	echo -ne ".$(basename ${file}): \t"
+	
+	# Backup files, remove links
+	if [[ -f "${HOME}/.$(basename ${file})" ]]; then
+		if [[ ! -h "${HOME}/.$(basename ${file})" ]]; then
+			mv ${HOME}/.$(basename ${file}) ${olddir}
+			echo -ne "[Moved]\t"
+		elif [[ -h "${HOME}/.$(basename ${file})" ]]; then
+			rm ${HOME}/.$(basename ${file})
+			echo -ne "[Link Removed]\t"
+		fi
 	fi
+
+	# Link in configs
 	if [[ ! -h "${HOME}/.$file" ]]; then
-		ln -s ${dir}/${file} ~/.${file}
+		ln -s ${file} ~/.$(basename ${file} )
 		echo -n "[Linked] "
 	else
 		echo -n "[link exists] "
