@@ -33,15 +33,19 @@ for file in $dir/config/*; do
 		if [[ ! -h "${HOME}/.$(basename ${file})" ]]; then
 			mv ${HOME}/.$(basename ${file}) ${olddir}
 			echo -ne "[Moved]\t"
-		elif [[ -h "${HOME}/.$(basename ${file})" ]]; then
-			rm ${HOME}/.$(basename ${file})
-			echo -ne "[Link Removed]\t"
+#		elif [[ -h "${HOME}/.$(basename ${file})" ]]; then
+#			rm ${HOME}/.$(basename ${file})
+#			echo -ne "[Link Removed]\t"
 		fi
+	elif [[ -h "${HOME}/.$(basename ${file})" ]]; then
+		# Here are orphaned symlinks
+		rm ${HOME}/.$(basename ${file})
+		echo -ne "[Orphaned Link Removed]\t"
 	fi
 
 	# Link in configs
-	if [[ ! -h "${HOME}/.$file" ]]; then
-		ln -s ${file} ~/.$(basename ${file} )
+	if [[ ! -h "${HOME}/.$(basename ${file})" ]]; then
+		ln -s ${file} ~/.$(basename ${file})
 		echo -n "[Linked] "
 	else
 		echo -n "[link exists] "
