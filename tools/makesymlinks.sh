@@ -6,56 +6,106 @@
 
 ########## Variables
 
-dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
-#files="bashrc vimrc screenrc dircolors toprc tmux.conf zshrc"     # list of files/folders to symlink in homedir
+dir=$(realpath $(dirname ${BASH_SOURCE[0]})/../)
+backupdir=$dir/backup
 
-##########
-
-# create dotfiles_old in homedir
-echo -n "Backup folder [$olddir]: ... "
-if [[ ! -d $olddir ]]; then
-	mkdir -p $olddir 2>&1 > /dev/null
+########## create backup
+echo -n "Backup folder [$backupdir]: ... "
+if [[ ! -d $backupdir ]]; then
+	mkdir -p $backupdir 2>&1 > /dev/null
 	echo "Created"
 else
 	echo "Exists"
 fi
 
 # change to the dotfiles directory
-cd $dir
+# cd $dir
+dest_dir=${HOME}
+cd ${dest_dir}
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
-for file in $dir/config/*; do
-	echo -ne ".$(basename ${file}): \t"
-	
-	# Backup files, remove links
-	if [[ -f "${HOME}/.$(basename ${file})" ]]; then
-		if [[ ! -h "${HOME}/.$(basename ${file})" ]]; then
-			mv ${HOME}/.$(basename ${file}) ${olddir}
-			echo -ne "[Moved]\t"
-#		elif [[ -h "${HOME}/.$(basename ${file})" ]]; then
-#			rm ${HOME}/.$(basename ${file})
-#			echo -ne "[Link Removed]\t"
+create_links() {
+	folder=$1
+	# echo "*****"
+	# echo "Config Folder: ${folder}"
+	# echo "Current Directory: $(pwd)"
+	# echo "Directory Stack: [$(dirs)]"
+	# echo "*****"
+
+	for entry in ${folder}/*; do
+		file="$(basename ${entry})"
+		echo -ne "${file}: \t"
+		if [[ ${#file} -lt 6 ]]; then
+			echo -ne "\t"
 		fi
-	elif [[ -h "${HOME}/.$(basename ${file})" ]]; then
-		# Here are orphaned symlinks
-		rm ${HOME}/.$(basename ${file})
-		echo -ne "[Orphaned Link Removed]\t"
-	fi
 
-	# Link in configs
-	if [[ ! -h "${HOME}/.$(basename ${file})" ]]; then
-		ln -s ${file} ~/.$(basename ${file})
-		echo -n "[Linked] "
-	else
-		echo -n "[link exists] "
-	fi
-	echo " Done!"
-done
+		# Backup entries, remove links
+		if [[ -f ".${file}" ]]; then
+			if [[ ! -h ".${file}" ]]; then
+				mv .${file} ${backupdir}
+				echo -ne "[Moved]\t"
+			fi
+		# elif [[ -d ".${file}" ]]; then
+		# 	# leave directories alone
+		# 	echo "directory"
+		elif [[ -h ".${file}" && ! -d ".${file}" ]]; then
+			# Here are orphaned symlinks
+			rm .${file}
+			echo -ne "[Orphaned Link Removed]\t"
+		fi
 
-echo "Creating symlink for vim colors."
-mkdir -p ${olddir}/.vim/colors 2>&1 > /dev/null
-mkdir -p ~/.vim/colors &>/dev/null 2>&1 > /dev/null
-mv ~/.vim/colors/solarized.vim ${olddir}/.vim/colors 2>&1 > /dev/null
-ln -s $dir/vim/colors/solarized.vim ~/.vim/colors/solarized.vim 2>&1 > /dev/null
+		# Directories
+		# if [[ -d "${entry}" ]]; then
+		# 	echo " >>> .${file} <<< "
+		# 	if [[ ! -d ".${file}" ]]; then
+		# 		# echo "creating directory: ${dest_dir}/.${file}"
+		# 		mkdir ".${file}" 2>1& /dev/null;
+		# 		echo "[Directory Created] "
+		# 	else
+		# 		echo "[Directory Exists] "
+		# 	fi
+		# 	pushd "$(basename ${entry})"
+		# 	create_links $entry
+		# 	popd
+		# else
+			# Link in configs
+			if [[ ! -h ".${file}" ]]; then
+				ln -s ${entry} .${file}
+				echo -n "[Linked] "
+			else
+				echo -n "[link exists] "
+			fi
+		# fi
+		echo " Done!"
+	done
+}
+
+create_links ${dir}/config/
+# move any existing dotfiles in homedir to backupdir, then create symlinks 
+# level="${HOME}"
+# for folder in $(find $dir/config/ -maxdepth 1 -type d); do
+	# echo "*** create_links ${folder} ***"
+	# create_links $folder
+	# level="${level}/${folder}"
+#	if [[ "${folder}" -ne "${dir}/config/" ]]; then
+#		mkdir -p $folder 2>&1 /dev/null
+#	fi
+#	for subfolder in ${folder}/*/; do
+#	done
+# done
+
+# 1:
+# For directory in config/
+#	link files
+#	create subdirectory
+#	change to subdirectory
+#	goto 1
+# 2:
+# Next
+
+
+#echo "Creating symlink for vim colors."
+#mkdir -p ${backupdir}/vim/colors 2>&1 > /dev/null
+#mkdir -p ~/.vim/colors &>/dev/null 2>&1 > /dev/null
+#mv ~/.vim/colors/solarized.vim ${backupdir}/.vim/colors 2>&1 > /dev/null
+#ln -s $dir/vim/colors/solarized.vim ~/.vim/colors/solarized.vim 2>&1 > /dev/null
 
