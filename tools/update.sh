@@ -17,3 +17,4 @@ elif [[ -d ~/.oh-my-zsh ]]; then
 fi
 
 ~/dotfiles/tools/makesymlinks.sh
+source ~/.zshrc
