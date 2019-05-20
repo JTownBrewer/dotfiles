@@ -18,10 +18,8 @@ else
 	echo "Exists"
 fi
 
-# change to the dotfiles directory
-# cd $dir
 dest_dir=${HOME}
-cd ${dest_dir}
+pushd ${HOME} > /dev/null
 
 create_links() {
 	folder=$1
@@ -44,9 +42,6 @@ create_links() {
 				mv .${file} ${backupdir}
 				echo -ne "[Moved]\t"
 			fi
-		# elif [[ -d ".${file}" ]]; then
-		# 	# leave directories alone
-		# 	echo "directory"
 		elif [[ -h ".${file}" && ! -d ".${file}" ]]; then
 			# Here are orphaned symlinks
 			rm .${file}
@@ -54,19 +49,22 @@ create_links() {
 		fi
 
 		# Directories
-		# if [[ -d "${entry}" ]]; then
-		# 	echo " >>> .${file} <<< "
-		# 	if [[ ! -d ".${file}" ]]; then
-		# 		# echo "creating directory: ${dest_dir}/.${file}"
-		# 		mkdir ".${file}" 2>1& /dev/null;
-		# 		echo "[Directory Created] "
-		# 	else
-		# 		echo "[Directory Exists] "
-		# 	fi
-		# 	pushd "$(basename ${entry})"
-		# 	create_links $entry
-		# 	popd
-		# else
+		if [[ -d "${entry}" ]]; then
+			if [[ ! -d ".${file}" ]]; then
+				# echo "creating directory: ${dest_dir}/.${file}"
+				mkdir ".${file}"
+				echo "[Directory Created] "
+			else
+				echo "[Directory Exists] "
+			fi
+			pushd ${entry} > /dev/null
+			for dfile in $(find ./ -type f); do
+				echo -n "  $(basename ${dfile}): \t [Linked]"
+				mkdir -p ${dest_dir}/.${file}/$(dirname ${dfile}) &> /dev/null
+				ln -s $(realpath ${dfile}) ${dest_dir}/.${file}/${dfile} &> /dev/null
+			done
+			popd > /dev/null
+		else
 			# Link in configs
 			if [[ ! -h ".${file}" ]]; then
 				ln -s ${entry} .${file}
@@ -74,38 +72,14 @@ create_links() {
 			else
 				echo -n "[link exists] "
 			fi
-		# fi
+		fi
 		echo " Done!"
 	done
 }
 
 create_links ${dir}/config/
-# move any existing dotfiles in homedir to backupdir, then create symlinks 
-# level="${HOME}"
-# for folder in $(find $dir/config/ -maxdepth 1 -type d); do
-	# echo "*** create_links ${folder} ***"
-	# create_links $folder
-	# level="${level}/${folder}"
-#	if [[ "${folder}" -ne "${dir}/config/" ]]; then
-#		mkdir -p $folder 2>&1 /dev/null
-#	fi
-#	for subfolder in ${folder}/*/; do
-#	done
-# done
+popd > /dev/null
 
-# 1:
-# For directory in config/
-#	link files
-#	create subdirectory
-#	change to subdirectory
-#	goto 1
-# 2:
-# Next
-
-
-#echo "Creating symlink for vim colors."
-#mkdir -p ${backupdir}/vim/colors 2>&1 > /dev/null
-#mkdir -p ~/.vim/colors &>/dev/null 2>&1 > /dev/null
-#mv ~/.vim/colors/solarized.vim ${backupdir}/.vim/colors 2>&1 > /dev/null
-#ln -s $dir/vim/colors/solarized.vim ~/.vim/colors/solarized.vim 2>&1 > /dev/null
-
+# Find powerline dependencies
+pvim=$(python3 -c "import powerline as _; print(_.__path__)")
+echo ${pvim}
