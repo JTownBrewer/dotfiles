@@ -145,9 +145,15 @@ elif [[ -d ~/.oh-my-zsh/custom/themes/powerlevel9k/ ]]; then
 	ZSH_THEME="powerlevel9k/powerlevel9k"
 elif [[ -f ~/powerlevel9k/powerlevel9k.zsh-theme ]]; then
 	source ~/powerlevel9k/powerlevel9k.zsh-theme
-elif [[ -f /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
+elif [[ "$(locate powerline.zsh)" != "" ]]; then
 	powerline-daemon -q
-	source /usr/share/powerline/bindings/zsh/powerline.zsh
+	source "$(locate powerline.zsh)"
+#elif [[ -f /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
+#	powerline-daemon -q
+#	source /usr/share/powerline/bindings/zsh/powerline.zsh
+#elif [[ -f /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+#	powerline-daemon -q
+#	source /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 else
 	ZSH_THEME="agnoster"
 fi
