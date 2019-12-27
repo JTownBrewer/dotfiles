@@ -8,6 +8,9 @@ else
 	ZSH=~/.oh-my-zsh/
 fi
 
+# powerline location
+export POWERLINE=$(python3 -c "import powerline as _; print(_.__path__[0])")
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -67,7 +70,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git colored-man-pages systemd 
+  git colored-man-pages systemd ssh-agent
 )
 
 # User configuration
