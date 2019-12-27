@@ -59,7 +59,7 @@ create_links() {
             fi
             pushd ${entry} > /dev/null
             for dfile in $(find ./ -type f); do
-                echo -n "  $(basename ${dfile}): \t [Linked]"
+                echo -ne "  $(basename ${dfile}): \t [Linked]"
                 mkdir -p ${dest_dir}/.${file}/$(dirname ${dfile}) &> /dev/null
                 ln -s $(realpath ${dfile}) ${dest_dir}/.${file}/${dfile} &> /dev/null
             done
