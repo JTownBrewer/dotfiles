@@ -2,6 +2,10 @@
 
 cd ${HOME}/dotfiles
 
+# Update ourselves
+git reset --hard > /dev/null
+git pull --rebase --stat origin master
+
 # Install or upgrade Oh My ZSH
 if [[ -f ${HOME}/.oh-my-zsh/tools/upgrade.sh ]]; then
     ZSH=${HOME}/.oh-my-zsh
