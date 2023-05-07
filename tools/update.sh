@@ -12,11 +12,11 @@ get_os_info() {
         VER=$(lsb_release -sr)
     elif [ -f /etc/lsb-release ]; then
         # For some versions of Debian/Ubuntu without lsb_release command
-        OS=$DISBRIB_ID
-        VER=$DISRIB_RELEASE
+        OS=$DISTRIB_ID
+        VER=$DISTRIB_RELEASE
     elif [ -f /etc/debian_version ]; then
         # Older Debian/Ubuntu/etc.
-        OS=Debian
+        OS=debian
         VER=$(cat /etc/debian_version)
 #    elif [ -f /etc/SuSe-release ]; then
         # Older SuSE/etc.
@@ -48,8 +48,6 @@ fi
 # Install or upgrade powerline-status
 #sudo pip3 install --upgrade powerline-status
 get_os_info
-echo "OS: ${OS}"
-echo "VER: ${VER}"
 
 if [ ${OS} == "arch" ]; then
     #PKGMGR=/usr/bin/pacman
