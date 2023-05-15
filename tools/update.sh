@@ -34,8 +34,8 @@ get_os_info() {
 cd ${HOME}/dotfiles
 
 # Update ourselves
-#git reset --hard > /dev/null
-#git pull --rebase --stat origin master
+git reset --hard > /dev/null
+git pull --rebase --stat origin master
 
 # Install or upgrade Oh My ZSH
 if [[ -f ${HOME}/.oh-my-zsh/tools/upgrade.sh ]]; then
@@ -52,7 +52,7 @@ get_os_info
 if [ ${OS} == "arch" ]; then
     #PKGMGR=/usr/bin/pacman
     sudo /usr/bin/pacman -S --needed powerline
-elif [ ${OS} == "debian" || $OS == "ubuntu"]; then
+elif [[ ${OS} == "debian" || $OS == "ubuntu" ]]; then
     #PKGMGR=/usr/bin/apt
     sudo /usr/bin/apt install powerline
 elif [ ${OS} == "fedora" ]; then
