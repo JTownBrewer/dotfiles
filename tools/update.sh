@@ -39,8 +39,9 @@ git pull --rebase --stat origin master
 
 # Install or upgrade Oh My ZSH
 if [[ -f ${HOME}/.oh-my-zsh/tools/upgrade.sh ]]; then
-    ZSH=${HOME}/.oh-my-zsh
-    env ZSH=$ZSH sh $ZSH/tools/upgrade.sh
+    #ZSH=${HOME}/.oh-my-zsh
+    #env ZSH=$ZSH sh $ZSH/tools/upgrade.sh
+    ${HOME}/.oh-my-zsh/tools/upgrade.sh
 else
     tools/oh-my-zsh/install.sh
 fi
@@ -51,13 +52,13 @@ get_os_info
 
 if [ ${OS} == "arch" ]; then
     #PKGMGR=/usr/bin/pacman
-    sudo /usr/bin/pacman -S --needed powerline
+    sudo /usr/bin/pacman -S --needed powerline python3-powerline
 elif [[ ${OS} == "debian" || $OS == "ubuntu" ]]; then
     #PKGMGR=/usr/bin/apt
-    sudo /usr/bin/apt install powerline
+    sudo /usr/bin/apt install powerline python3-powerline
 elif [ ${OS} == "fedora" ]; then
     #PKGMGR=/usr/bin/dnf
-    sudo /usr/bin/dnf install powerline
+    sudo /usr/bin/dnf install powerline python3-powerline
 #elif [ ${OS} == "centos" ]; then
     #PKGMGR=/usr/bin/yum
 #    sudo /usr/bin/yum 
