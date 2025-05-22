@@ -18,12 +18,6 @@ get_os_info() {
         # Older Debian/Ubuntu/etc.
         OS=debian
         VER=$(cat /etc/debian_version)
-#    elif [ -f /etc/SuSe-release ]; then
-        # Older SuSE/etc.
-    ...
-#    elif [ -f /etc/redhat-release ]; then
-        # Older Red Hat, CentOS, etc.
-    ...
     else
         # Fall back to uname, e.g. "Linux <version>", also works for BSD, etc.
         OS=$(uname -s)
@@ -34,20 +28,37 @@ get_os_info() {
 cd ${HOME}/dotfiles
 
 # Update ourselves
-git reset --hard > /dev/null
-git pull --rebase --stat origin master
+# Fetch the latest from remote.
+# If there's an update to this script, then
+# re-excute.
+git fetch --all
+git diff --quiet tools/update.sh
+UPDT=$?
+
+git pull
+if [[ $? ]]; then
+    echo "***** *****"
+    echo "Detected error during git pull"
+    echo "***** *****"
+
+    exit 1
+fi
+
+if [[ ${UPDT} ]]; then
+    echo "***** *****"
+    echo "Re-Executing ..."
+    echo "***** *****"
+    exec "$0" "$@"
+fi
 
 # Install or upgrade Oh My ZSH
 if [[ -f ${HOME}/.oh-my-zsh/tools/upgrade.sh ]]; then
-    #ZSH=${HOME}/.oh-my-zsh
-    #env ZSH=$ZSH sh $ZSH/tools/upgrade.sh
     ${HOME}/.oh-my-zsh/tools/upgrade.sh
 else
     tools/oh-my-zsh/install.sh
 fi
 
 # Install or upgrade powerline-status
-#sudo pip3 install --upgrade powerline-status
 get_os_info
 
 if [ ${OS} == "arch" ]; then
@@ -58,20 +69,20 @@ elif [[ ${OS} == "debian" || $OS == "ubuntu" ]]; then
     sudo /usr/bin/apt install powerline python3-powerline
 elif [ ${OS} == "fedora" ]; then
     #PKGMGR=/usr/bin/dnf
-    sudo /usr/bin/dnf install powerline python3-powerline
+    sudo /usr/bin/dnf install powerline python3-powerline tmux-powerline
 #elif [ ${OS} == "centos" ]; then
     #PKGMGR=/usr/bin/yum
 #    sudo /usr/bin/yum 
 fi
 
 
-# Install or upgrade PowerLevel9K
-if [[ -d ${HOME}/.oh-my-zsh/custom/themes/powerlevel9k ]]; then
-    pushd ${HOME}/.oh-my-zsh/custom/themes/powerlevel9k
+# Install or upgrade PowerLevel10K
+if [[ -d ${HOME}/.oh-my-zsh/custom/themes/powerlevel10k ]]; then
+    pushd ${HOME}/.oh-my-zsh/custom/themes/powerlevel10k
     git pull
     popd
 elif [[ -d ${HOME}/.oh-my-zsh ]]; then
-    git clone https://github.com/bhilburn/powerlevel9k.git ${HOME}/.oh-my-zsh/custom/themes/powerlevel9k
+    git clone https://github.com/romkatv/powerlevel10k.git ${HOME}/.oh-my-zsh/custom/themes/powerlevel10k
 fi
 
 # take care of the configuration symlinks
