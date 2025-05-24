@@ -96,7 +96,7 @@ if [[ "${TERM}" == "linux" ]]; then
 elif [[ -f ~/.host_shell-theme ]]; then
 	source ~/.host_shell-theme
 elif [[ -d ~/.oh-my-zsh/custom/themes/powerlevel10k/ ]]; then
-	ZSH_THEME="powerlevel9k/powerlevel10k"
+	ZSH_THEME="powerlevel10k/powerlevel10k"
 elif [[ "$(locate powerline.zsh)" != "" ]]; then
 	powerline-daemon -q
 	source "$(locate powerline.zsh)"
@@ -113,3 +113,5 @@ unalias run-help
 autoload run-help
 alias help=run-help
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/dotfiles/config/p10k.zsh ]] || source ~/dotfiles/config/p10k.zsh
