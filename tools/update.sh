@@ -59,7 +59,7 @@ echo ""
 
 echo "===== ====="
 echo "Checking if update.sh has changed ..."
-git diff --quiet tools/update.sh
+git diff --quiet FETCH_HEAD tools/update.sh
 UPDT=$?
 echo "Update: ${UPDT}"
 echo "===== ====="
