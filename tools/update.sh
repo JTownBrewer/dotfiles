@@ -30,21 +30,34 @@ cd ${HOME}/dotfiles
 # Update ourselves
 # Fetch the latest from remote.
 # If there's an update to this script, then
-# re-excute.
-git fetch --all
-git diff --quiet tools/update.sh
-UPDT=$?
+# re-excute
 
-git pull
-if [[ $? ]]; then
+MODS=$(git ls-files -m)
+if [[ -n ${MODS} ]]; then
     echo "***** *****"
-    echo "Detected error during git pull"
+    echo "Halting! There are locally modifed files in dotfiles:"
+    echo ""
+    echo ${MODS}
     echo "***** *****"
-
     exit 1
 fi
 
-if [[ ${UPDT} ]]; then
+git fetch --all
+git diff --quiet tools/update.sh
+UPDT=$?
+echo "UPDT=${UPDT}"
+
+PULL=$(git pull)
+if [[ $? -ne 0 ]]; then
+    echo "***** *****"
+    echo "Detected error during git pull:"
+    echo ""
+    echo ${PULL}
+    echo "***** *****"
+    exit 1
+fi
+
+if [[ ${UPDT} -ne 0 ]]; then
     echo "***** *****"
     echo "Re-Executing ..."
     echo "***** *****"
