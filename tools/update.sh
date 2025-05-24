@@ -76,7 +76,7 @@ get_os_info
 
 if [ ${OS} == "arch" ]; then
     #PKGMGR=/usr/bin/pacman
-    sudo /usr/bin/pacman -S --needed powerline python3-powerline
+    sudo /usr/bin/pacman -S --needed powerline
 elif [[ ${OS} == "debian" || $OS == "ubuntu" ]]; then
     #PKGMGR=/usr/bin/apt
     sudo /usr/bin/apt install powerline python3-powerline
