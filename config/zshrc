@@ -92,15 +92,16 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 if [[ "${TERM}" == "linux" ]]; then
+    # Console
 	ZSH_THEME="maran"
 elif [[ -f ~/.host_shell-theme ]]; then
+    # If host-specific theme is defined, use it
 	source ~/.host_shell-theme
 elif [[ -d ~/.oh-my-zsh/custom/themes/powerlevel10k/ ]]; then
+    # If PowerLevel10k is installed, use it
 	ZSH_THEME="powerlevel10k/powerlevel10k"
-elif [[ "$(locate powerline.zsh)" != "" ]]; then
-	powerline-daemon -q
-	source "$(locate powerline.zsh)"
 else
+    # Default
 	ZSH_THEME="agnoster"
 fi
 
