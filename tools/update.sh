@@ -25,6 +25,13 @@ get_os_info() {
     fi
 }
 
+THIS_SCRIPT=$(realpath ${0})
+
+echo ""
+echo "THIS_SCRIPT: ${THIS_SCRIPT}"
+echo ""
+
+
 cd ${HOME}/dotfiles
 
 # Update ourselves
@@ -32,6 +39,7 @@ cd ${HOME}/dotfiles
 # If there's an update to this script, then
 # re-excute
 
+echo ""
 echo "===== ====="
 echo "Checking for local modifications ..."
 MODS=$(git ls-files -m)
@@ -48,12 +56,14 @@ echo "===== ====="
 echo ""
 
 
+echo ""
 echo "===== ====="
 echo "Fetching from origin ..."
 git fetch --all
 echo "===== ====="
 echo ""
 
+echo ""
 echo "===== ====="
 echo "Checking if update.sh has changed ..."
 git diff --quiet FETCH_HEAD tools/update.sh
@@ -62,10 +72,12 @@ echo "Update: ${UPDT}"
 echo "===== ====="
 echo ""
 
+echo ""
 echo "===== ====="
 echo "Pulling dotfiles ..."
 PULL=$(git pull)
 if [[ $? -ne 0 ]]; then
+    echo ""
     echo "***** *****"
     echo "Detected error during git pull:"
     echo ""
@@ -77,15 +89,17 @@ echo "===== ====="
 echo ""
 
 if [[ ${UPDT} -ne 0 ]]; then
+    echo ""
     echo "***** *****"
     echo "Re-Executing ..."
     echo "***** *****"
     echo ""
     echo ""
-    exec "$0" "$@"
+    exec "${THIS_SCRIPT}" "$@"
 fi
 
 # Install or upgrade Oh My ZSH
+echo ""
 echo "===== ====="
 echo "Install/Upgrade Oh My ZSH"
 echo "===== ====="
@@ -98,6 +112,7 @@ else
 fi
 
 # Install or upgrade powerline-status
+echo ""
 echo "===== ====="
 echo "Install/Upgrade powerline-status"
 echo "===== ====="
@@ -121,6 +136,7 @@ fi
 
 
 # Install or upgrade PowerLevel10K
+echo ""
 echo "===== ====="
 echo "Install/Upgrade PowerLevel10k"
 echo "===== ====="
@@ -134,6 +150,7 @@ elif [[ -d ${HOME}/.oh-my-zsh ]]; then
 fi
 
 # take care of the configuration symlinks
+echo ""
 echo "===== ====="
 echo "Manage symlinks"
 echo "===== ====="
