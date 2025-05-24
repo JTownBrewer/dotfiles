@@ -63,7 +63,7 @@ echo "===== ====="
 echo ""
 
 echo "===== ====="
-echo "Pulling ..."
+echo "Pulling dotfiles ..."
 PULL=$(git pull)
 if [[ $? -ne 0 ]]; then
     echo "***** *****"
