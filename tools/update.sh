@@ -25,6 +25,9 @@ get_os_info() {
     fi
 }
 
+echo "HA!"
+exit 1
+
 cd ${HOME}/dotfiles
 
 # Update ourselves
