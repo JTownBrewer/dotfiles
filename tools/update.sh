@@ -78,10 +78,10 @@ if [ ${OS} == "arch" ]; then
     sudo /usr/bin/pacman -S --needed powerline
 elif [[ ${OS} == "debian" || $OS == "ubuntu" ]]; then
     #PKGMGR=/usr/bin/apt
-    sudo /usr/bin/apt install powerline python3-powerline
+    sudo /usr/bin/apt install powerline
 elif [ ${OS} == "fedora" ]; then
     #PKGMGR=/usr/bin/dnf
-    sudo /usr/bin/dnf install powerline python3-powerline tmux-powerline
+    sudo /usr/bin/dnf install powerline tmux-powerline
 #elif [ ${OS} == "centos" ]; then
     #PKGMGR=/usr/bin/yum
 #    sudo /usr/bin/yum 
