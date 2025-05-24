@@ -25,7 +25,7 @@ get_os_info() {
     fi
 }
 
-echo "HA!"
+echo "HAHA!"
 exit 1
 
 cd ${HOME}/dotfiles
