@@ -11,25 +11,6 @@ fi
 # powerline location
 export POWERLINE=$(python3 -c "import powerline as _; print(_.__path__[0])")
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="agnoster"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
 
@@ -70,7 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git colored-man-pages systemd ssh-agent
+  git colored-man-pages systemd
 )
 
 # User configuration
@@ -110,60 +91,18 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
-# powerlevel9k Customization
-#export DEFAULT_USER=$USER
-POWERLEVEL9K_MODE='nerdfont-complete'
-#POWERLEVEL9K_MODE=''
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(host user dir vcs)
-#POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true
-#POWERLEVEL9K_ALWAYS_SHOW_USER=true
-POWERLEVEL9K_USER_DEFAULT_FOREGROUND='yellow'
-POWERLEVEL9K_USER_ROOT_FOREGROUND='red'
-#POWERLEVEL9K_SSH_BACKGROUND='009'
-#POWERLEVEL9K_SSH_FOREGROUND='007'
-POWERLEVEL9K_HOST_LOCAL_BACKGROUND='003'
-POWERLEVEL9K_HOST_LOCAL_FOREGROUND='007'
-POWERLEVEL9K_HOST_REMOTE_BACKGROUND='009'
-POWERLEVEL9K_HOST_REMOTE_FOREGROUND='007'
-POWERLEVEL9K_HOST_FOREGROUND='007'
-POWERLEVEL9K_USER_BACKGROUND='011'
-POWERLEVEL9K_USER_FOREGROUND='007'
-#POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND='yellow'
-#POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND='red'
-#POWERLEVEL9K_ROOT_ICON=
-POWERLEVEL9K_DIR_SHOW_WRITABLE=true
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-
-#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs host)
-POWERLEVEL9K_STATUS_OK=false
-#POWERLEVEL9K_HOST_LOCAL_FOREGROUND='178'
-#POWERLEVEL9K_HOST_REMOTE_FOREGROUND='005'
-
 if [[ "${TERM}" == "linux" ]]; then
 	ZSH_THEME="maran"
 elif [[ -f ~/.host_shell-theme ]]; then
 	source ~/.host_shell-theme
-elif [[ -f /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme ]]; then
-	source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
-elif [[ -d ~/.oh-my-zsh/custom/themes/powerlevel9k/ ]]; then
-	ZSH_THEME="powerlevel9k/powerlevel9k"
-elif [[ -f ~/powerlevel9k/powerlevel9k.zsh-theme ]]; then
-	source ~/powerlevel9k/powerlevel9k.zsh-theme
+elif [[ -d ~/.oh-my-zsh/custom/themes/powerlevel10k/ ]]; then
+	ZSH_THEME="powerlevel9k/powerlevel10k"
 elif [[ "$(locate powerline.zsh)" != "" ]]; then
 	powerline-daemon -q
 	source "$(locate powerline.zsh)"
-#elif [[ -f /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
-#	powerline-daemon -q
-#	source /usr/share/powerline/bindings/zsh/powerline.zsh
-#elif [[ -f /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-#	powerline-daemon -q
-#	source /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 else
 	ZSH_THEME="agnoster"
 fi
-
-#powerline-daemon -q
-#. /usr/share/powerline/bindings/zsh/powerline.zsh
 
 source $ZSH/oh-my-zsh.sh
 
