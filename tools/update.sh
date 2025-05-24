@@ -45,7 +45,6 @@ fi
 git fetch --all
 git diff --quiet tools/update.sh
 UPDT=$?
-echo "UPDT=${UPDT}"
 
 PULL=$(git pull)
 if [[ $? -ne 0 ]]; then
