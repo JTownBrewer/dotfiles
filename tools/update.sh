@@ -32,6 +32,8 @@ cd ${HOME}/dotfiles
 # If there's an update to this script, then
 # re-excute
 
+echo "===== ====="
+echo "Checking for local modifications ..."
 MODS=$(git ls-files -m)
 if [[ -n ${MODS} ]]; then
     echo "***** *****"
@@ -41,11 +43,27 @@ if [[ -n ${MODS} ]]; then
     echo "***** *****"
     exit 1
 fi
+echo " ... Done"
+echo "===== ====="
+echo ""
 
+
+echo "===== ====="
+echo "Fetching from origin ..."
 git fetch --all
+echo "===== ====="
+echo ""
+
+echo "===== ====="
+echo "Checking if update.sh has changed ..."
 git diff --quiet tools/update.sh
 UPDT=$?
+echo "Update: ${UPDT}"
+echo "===== ====="
+echo ""
 
+echo "===== ====="
+echo "Pulling ..."
 PULL=$(git pull)
 if [[ $? -ne 0 ]]; then
     echo "***** *****"
@@ -55,6 +73,8 @@ if [[ $? -ne 0 ]]; then
     echo "***** *****"
     exit 1
 fi
+echo "===== ====="
+echo ""
 
 if [[ ${UPDT} -ne 0 ]]; then
     echo "***** *****"
