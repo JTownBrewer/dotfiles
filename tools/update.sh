@@ -80,10 +80,17 @@ if [[ ${UPDT} -ne 0 ]]; then
     echo "***** *****"
     echo "Re-Executing ..."
     echo "***** *****"
+    echo ""
+    echo ""
     exec "$0" "$@"
 fi
 
 # Install or upgrade Oh My ZSH
+echo "===== ====="
+echo "Install/Upgrade Oh My ZSH"
+echo "===== ====="
+echo ""
+
 if [[ -f ${HOME}/.oh-my-zsh/tools/upgrade.sh ]]; then
     ${HOME}/.oh-my-zsh/tools/upgrade.sh
 else
@@ -91,6 +98,11 @@ else
 fi
 
 # Install or upgrade powerline-status
+echo "===== ====="
+echo "Install/Upgrade powerline-status"
+echo "===== ====="
+echo ""
+
 get_os_info
 
 if [ ${OS} == "arch" ]; then
@@ -109,6 +121,10 @@ fi
 
 
 # Install or upgrade PowerLevel10K
+echo "===== ====="
+echo "Install/Upgrade PowerLevel10k"
+echo "===== ====="
+echo ""
 if [[ -d ${HOME}/.oh-my-zsh/custom/themes/powerlevel10k ]]; then
     pushd ${HOME}/.oh-my-zsh/custom/themes/powerlevel10k
     git pull
@@ -118,7 +134,13 @@ elif [[ -d ${HOME}/.oh-my-zsh ]]; then
 fi
 
 # take care of the configuration symlinks
+echo "===== ====="
+echo "Manage symlinks"
+echo "===== ====="
+echo ""
+
 ${HOME}/dotfiles/tools/makesymlinks.sh
+
 case "zsh" in ("*${SHELL}")
     source ${HOME}/.zshrc
 esac
