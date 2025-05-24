@@ -27,11 +27,6 @@ get_os_info() {
 
 THIS_SCRIPT=$(realpath ${0})
 
-echo ""
-echo "THIS_SCRIPT: ${THIS_SCRIPT}"
-echo ""
-
-
 cd ${HOME}/dotfiles
 
 # Update ourselves
@@ -40,7 +35,7 @@ cd ${HOME}/dotfiles
 # re-excute
 
 echo ""
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo "Checking for local modifications ..."
 MODS=$(git ls-files -m)
 if [[ -n ${MODS} ]]; then
@@ -52,28 +47,28 @@ if [[ -n ${MODS} ]]; then
     exit 1
 fi
 echo " ... Done"
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo ""
 
 
 echo ""
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo "Fetching from origin ..."
 git fetch --all
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo ""
 
 echo ""
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo "Checking if update.sh has changed ..."
 git diff --quiet FETCH_HEAD tools/update.sh
 UPDT=$?
 echo "Update: ${UPDT}"
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo ""
 
 echo ""
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo "Pulling dotfiles ..."
 PULL=$(git pull)
 if [[ $? -ne 0 ]]; then
@@ -85,7 +80,7 @@ if [[ $? -ne 0 ]]; then
     echo "***** *****"
     exit 1
 fi
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo ""
 
 if [[ ${UPDT} -ne 0 ]]; then
@@ -100,9 +95,9 @@ fi
 
 # Install or upgrade Oh My ZSH
 echo ""
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo "Install/Upgrade Oh My ZSH"
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo ""
 
 if [[ -f ${HOME}/.oh-my-zsh/tools/upgrade.sh ]]; then
@@ -113,9 +108,9 @@ fi
 
 # Install or upgrade powerline-status
 echo ""
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo "Install/Upgrade powerline-status"
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo ""
 
 get_os_info
@@ -137,9 +132,9 @@ fi
 
 # Install or upgrade PowerLevel10K
 echo ""
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo "Install/Upgrade PowerLevel10k"
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo ""
 if [[ -d ${HOME}/.oh-my-zsh/custom/themes/powerlevel10k ]]; then
     pushd ${HOME}/.oh-my-zsh/custom/themes/powerlevel10k
@@ -151,9 +146,9 @@ fi
 
 # take care of the configuration symlinks
 echo ""
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo "Manage symlinks"
-echo "===== ====="
+echo "===== ===== ===== ===== ===== ===== ====="
 echo ""
 
 ${HOME}/dotfiles/tools/makesymlinks.sh
