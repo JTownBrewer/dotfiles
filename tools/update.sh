@@ -153,6 +153,4 @@ echo ""
 
 ${HOME}/dotfiles/tools/makesymlinks.sh
 
-case "zsh" in ("*${SHELL}")
-    source ${HOME}/.zshrc
-esac
+source ${HOME}/.zshrc
