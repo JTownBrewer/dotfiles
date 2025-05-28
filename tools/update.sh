@@ -153,4 +153,4 @@ echo ""
 
 ${HOME}/dotfiles/tools/makesymlinks.sh
 
-source ${HOME}/.zshrc
+#source ${HOME}/.zshrc
